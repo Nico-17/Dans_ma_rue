@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "mappings": "ACAA,AAAA,EAAE,AAAA,CACE,KAAK,CAAE,OAAO,CACd,UAAU,CAAE,iBAAkB,CACjC,ACHD,AAAA,OAAO,AAAA,CACH,UAAU,CAAE,OAAO,CACtB,ACFD,AAAA,UAAU,AAAA,CACN,gBAAgB,CAAE,KAAK,CACvB,WAAW,CAAE,EAAE,CAClB,AAED,AAAA,KAAK,AAAA,CACD,KAAK,CAAE,OACX,CAAC",
+    "sources": [
+        "style.scss",
+        "_header.scss",
+        "_footer.scss",
+        "_body.scss"
+    ],
+    "names": [],
+    "file": "style.min.css"
+}
