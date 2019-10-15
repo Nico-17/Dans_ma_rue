@@ -17,7 +17,7 @@ class URL{
     public static function getPositiveInt(string $name, ?int $default = null): ?int 
     {
         $param = self::getInt($name, $default);
-        if ($param !== null && $params <= 0){
+        if ($param !== null && $param <= 0){
             throw new \Exception('Numéro de page invalide');
         }
         return $param;

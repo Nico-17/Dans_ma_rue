@@ -8,15 +8,23 @@ $pdo->exec('SET NAMES utf8');
 $table = new DefautTable($pdo);
 [$defauts, $pagination] = $table->findPaginated();
 
-$link = $router->url('defaut');
+$link = $router->url('admin_defauts');
 ?>
 
-<h1>Liste des defauts</h1>
+<?php if(isset($_GET['delete'])): ?>
+<div class="alert alert-success">
+    Le défaut a bien été supprimé
+</div>
+<?php endif ?>
+
+<h1 class="mb-3">Liste des defauts</h1>
+
+<a href="#" class="btn btn-primary mb-3">Ajouter un défaut</a>
 
 <div class="row">
     <?php foreach($defauts as $defaut): ?>
     <div class="col-md-12">
-        <?php require 'card.php' ?>
+        <?php require 'admin_card.php' ?>
     </div>
     <?php endforeach ?>
 </div>
