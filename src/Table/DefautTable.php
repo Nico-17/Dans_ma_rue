@@ -15,6 +15,22 @@ class DefautTable{
         $this->pdo = $pdo;
     }
 
+    public function update(Defaut $defaut): void 
+    {
+        $query = $this->pdo->prepare("UPDATE {$this->table} SET lieu = :lieu, nature = :nature, service = :service, date_fin = :date_fin WHERE id = :id");
+        $ok = $query->execute([
+            'id' => $defaut->getId(),
+            'lieu' => $defaut->getLieu(),
+            'service' => $defaut->getService(),
+            'nature' => $defaut->getNature(),
+            'date_fin' => $defaut->getDateFin()->format('Y-m-d')
+            
+        ]);
+        if($ok === false){
+            throw new \Exception("Erreur lors de la modification du défaut  n°$id");
+        }
+    }
+
     public function delete(int $id): void
     {
         $query = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = ?");
@@ -22,6 +38,18 @@ class DefautTable{
         if($ok === false){
             throw new \Exception("Erreur lors de la suppression du défaut  n°$id");
         }
+    }
+
+    public function find (int $id): Defaut 
+    {
+        $query = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE id = :id");
+        $query->execute(['id' => $id]);
+        $query->setFetchMode(PDO::FETCH_CLASS, Defaut::class);
+        $result = $query->fetch();
+        if($result === false){
+            throw new \exception("Erreur");
+        }
+        return $result;
     }
 
     public function findPaginated()
