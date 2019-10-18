@@ -12,7 +12,7 @@ class Form{
         $this->errors = $errors;
     }
 
-    private function getValue(string $key): string
+    private function getValue(string $key): ?string
     {
         if(is_array($this->data)){
             return $this->data[$key] ?? null;

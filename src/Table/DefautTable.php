@@ -15,6 +15,22 @@ class DefautTable{
         $this->pdo = $pdo;
     }
 
+    public function create(Defaut $defaut): void 
+    {
+        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET lieu = :lieu, nature = :nature, service = :service, date_fin = :date_fin");
+        $ok = $query->execute([
+            'lieu' => $defaut->getLieu(),
+            'service' => $defaut->getService(),
+            'nature' => $defaut->getNature(),
+            'date_fin' => $defaut->getDateFin()
+            
+        ]);
+        if($ok === false){
+            throw new \Exception("Erreur lors de la création du défaut  ");
+        }
+        $defaut->setId($this->pdo->lastInsertId());
+    }
+
     public function update(Defaut $defaut): void 
     {
         $query = $this->pdo->prepare("UPDATE {$this->table} SET lieu = :lieu, nature = :nature, service = :service, date_fin = :date_fin WHERE id = :id");
@@ -23,7 +39,7 @@ class DefautTable{
             'lieu' => $defaut->getLieu(),
             'service' => $defaut->getService(),
             'nature' => $defaut->getNature(),
-            'date_fin' => $defaut->getDateFin()->format('Y-m-d')
+            'date_fin' => $defaut->getDateFin()
             
         ]);
         if($ok === false){

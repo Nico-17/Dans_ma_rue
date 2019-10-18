@@ -38,6 +38,12 @@ class Defaut{
         return $this->id;
     }
 
+    public function setId(int $id): self 
+    {
+        $this->id = $id;
+        return $this;
+    }
+
     public function getNature(): ?string
     {
         return $this->nature;
@@ -82,20 +88,20 @@ class Defaut{
         return $this;
     }
 
-    public function getDateObserv(): DateTime
+    public function getDateObservation(): DateTime
     {
         return new DateTime($this->date_observation);
     }
 
-    public function setDateObserv(string $date_observation): self
+    public function setDateObservation(string $date_observation): self
     {
         $this->date_observation = $date_observation;
         return $this;
     }
 
-    public function getDateFin(): DateTime
+    public function getDateFin()
     {
-        return new DateTime($this->date_fin);
+        return $this->date_fin;
     }
     
     public function setDateFin(string $date_fin): self
