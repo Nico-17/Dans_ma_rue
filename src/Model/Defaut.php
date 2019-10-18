@@ -11,16 +11,65 @@ class Defaut{
 
     private $lieu;
 
-    private $service;
+    private $services;
 
     private $photo;
 
     private $date_observation;
 
-    private $etats = [];
+    private $etat;
 
     private $date_fin;
-    
+
+    private $X;
+
+    private $Y;
+
+    private $marqueur;
+
+    public function getX(): ?float
+    {
+        return $this->X;
+    }
+
+    public function setX(float $X): self
+    {
+        $this->X = $X;
+        return $this;
+    }
+
+    public function getY(): ?float
+    {
+        return $this->Y;
+    }
+
+    public function setY(float $Y): self
+    {
+        $this->Y = $Y;
+        return $this;
+    }
+
+    public function getMarqueur(): ?int
+    {
+        return $this->marqueur;
+    }
+
+    public function setMarqueur(int $marqueur): self
+    {
+        $this->marqueur = $marqueur;
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
+        return $this;
+    }
 
     public function getName(): ?string
     {
@@ -66,14 +115,14 @@ class Defaut{
         return $this;
     }
 
-    public function getService(): ?string
+    public function getServices(): ?string
     {
-        return $this->service;
+        return $this->services;
     }
 
-    public function setService(string $service): self
+    public function setServices(string $services): self
     {
-        $this->service = $service;
+        $this->services = $services;
         return $this;
     }
 

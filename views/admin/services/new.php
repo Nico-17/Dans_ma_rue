@@ -17,6 +17,7 @@ $bouton = 'Ajouter';
 
 if (!empty($_POST)){ 
     $pdo = Connection::getPDO();
+    $pdo->exec('SET NAMES utf8');
     $serviceTable = new ServiceTable($pdo);
     Validator::lang('fr');
     $v = new ServiceValidator($_POST);
@@ -26,7 +27,7 @@ if (!empty($_POST)){
         header('Location: ' . $router->url('admin_services'));
         exit();
     } else {
-       // $errors = $v->errors();
+        $errors = $v->errors();
     }
 }
 $form = new Form($services, $errors);

@@ -10,6 +10,7 @@ use App\Auth;
 Auth::check();
 
 $pdo = Connection::getPDO();
+$pdo->exec('SET NAMES utf8');
 $servicesTable = new ServiceTable($pdo);
 $services = $servicesTable->find($params['services']);
 $success = false;

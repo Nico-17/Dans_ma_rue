@@ -17,6 +17,7 @@ $bouton = 'Ajouter';
 
 if (!empty($_POST)){ 
     $pdo = Connection::getPDO();
+    $pdo->exec('SET NAMES utf8');
     $userTable = new UtilisateurTable($pdo);
     Validator::lang('fr');
     $v = new UtilisateurValidator($_POST);

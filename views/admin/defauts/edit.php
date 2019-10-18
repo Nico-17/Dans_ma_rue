@@ -6,10 +6,12 @@ use App\HTML\Form;
 use App\Validators\DefautValidator;
 use App\ObjectHelper;
 use App\Auth;
+use App\Model\Defaut;
 
 Auth::check();
 
 $pdo = Connection::getPDO();
+$pdo->exec('SET NAMES utf8');
 $defautTable = new DefautTable($pdo);
 $defaut = $defautTable->find($params['id']);
 $success = false;
@@ -19,7 +21,7 @@ $bouton = 'Modifier';
 if (!empty($_POST)){
     Validator::lang('fr');
     $v = new DefautValidator($_POST);
-    ObjectHelper::hydrate($defaut, $_POST, ['lieu', 'service', 'nature', 'date_fin']);
+    ObjectHelper::hydrate($defaut, $_POST, ['lieu', 'services', 'nature', 'date_fin', 'X', 'Y', 'etat']);
     if ($v->validate()){
         $defautTable->update($defaut);
         $success = true;

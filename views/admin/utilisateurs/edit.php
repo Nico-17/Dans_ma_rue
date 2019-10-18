@@ -10,6 +10,7 @@ use App\Auth;
 Auth::check();
 
 $pdo = Connection::getPDO();
+$pdo->exec('SET NAMES utf8');
 $userTable = new UtilisateurTable($pdo);
 $user = $userTable->find($params['id']);
 $success = false;

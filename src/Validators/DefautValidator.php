@@ -12,8 +12,7 @@ class DefautValidator{
     {
         $this->data = $data;
         $v = new Validator($data);
-        $v->rule('required', ['lieu', 'service']);
-        $v->rule('lengthMin', ['lieu', 'service'], 5);
+        $v->rule('required', ['lieu', 'services', 'nature', 'X', 'Y', 'etat']);
         $this->validator = $v;
     }
 

@@ -17,10 +17,13 @@ class DefautTable{
 
     public function create(Defaut $defaut): void 
     {
-        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET lieu = :lieu, nature = :nature, service = :service, date_fin = :date_fin");
+        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET lieu = :lieu, nature = :nature, services = :services, date_fin = :date_fin, X = :X, Y = :Y, etat = :etat");
         $ok = $query->execute([
             'lieu' => $defaut->getLieu(),
-            'service' => $defaut->getService(),
+            'X' => $defaut->getX(),
+            'Y' => $defaut->getY(),
+            'etat' => $defaut->getEtat(),
+            'services' => $defaut->getServices(),
             'nature' => $defaut->getNature(),
             'date_fin' => $defaut->getDateFin()
             
@@ -33,11 +36,14 @@ class DefautTable{
 
     public function update(Defaut $defaut): void 
     {
-        $query = $this->pdo->prepare("UPDATE {$this->table} SET lieu = :lieu, nature = :nature, service = :service, date_fin = :date_fin WHERE id = :id");
+        $query = $this->pdo->prepare("UPDATE {$this->table} SET lieu = :lieu, nature = :nature, services = :services, date_fin = :date_fin, X = :X, Y = :Y, etat = :etat WHERE id = :id");
         $ok = $query->execute([
             'id' => $defaut->getId(),
             'lieu' => $defaut->getLieu(),
-            'service' => $defaut->getService(),
+            'X' => $defaut->getX(),
+            'Y' => $defaut->getY(),
+            'etat' => $defaut->getEtat(),
+            'services' => $defaut->getServices(),
             'nature' => $defaut->getNature(),
             'date_fin' => $defaut->getDateFin()
             
@@ -80,5 +86,4 @@ class DefautTable{
         $defauts = $paginatedQuery->getItems(Defaut::class);
         return [$defauts, $paginatedQuery];
     }
-
 }

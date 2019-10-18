@@ -17,10 +17,11 @@ $bouton = 'Ajouter';
 
 if (!empty($_POST)){ 
     $pdo = Connection::getPDO();
+    $pdo->exec('SET NAMES utf8');
     $defautTable = new DefautTable($pdo);
     Validator::lang('fr');
     $v = new DefautValidator($_POST);
-    ObjectHelper::hydrate($defaut, $_POST, ['lieu', 'service', 'nature', 'date_fin']);
+    ObjectHelper::hydrate($defaut, $_POST, ['lieu', 'services', 'nature', 'date_fin', 'X', 'Y', 'etat']);
     if ($v->validate()){
         $defautTable->create($defaut);
         header('Location: ' . $router->url('admin_defauts'));
