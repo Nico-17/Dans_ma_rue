@@ -9,6 +9,7 @@ class ServiceTable{
 
     private $pdo;
     protected $table = "services";
+    private $class = Service::class;
 
     public function __construct(PDO $pdo)
     {
@@ -77,6 +78,22 @@ class ServiceTable{
         );
         $services = $paginatedQuery->getItems(Service::class);
         return [$services, $paginatedQuery];
+    }
+
+    public function all(): array
+    {
+        $sql ="SELECT * FROM {$this->table}";
+        return $this->pdo->query($sql, PDO::FETCH_CLASS, $this->class)->fetchAll();
+    }
+
+    public function list(): array
+    {
+        $services = $this->all();
+        $results = [];
+        foreach($services as $service){
+            $results[$service->getServices()] = $service->getServices();
+        }
+        return $results;
     }
 
 }

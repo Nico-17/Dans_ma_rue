@@ -12,7 +12,7 @@ class Form{
         $this->errors = $errors;
     }
 
-    private function getValue(string $key): ?string
+    private function getValue(string $key)
     {
         if(is_array($this->data)){
             return $this->data[$key] ?? null;
@@ -66,5 +66,23 @@ HTML;
             {$this->getErrorFeedback($key)}
         </div>
 HTML;    
-    } 
+    }
+    
+    public function select (string $key, string $label, array $options= []): string 
+    {
+        $optionsHTML = [];
+        $value = $this->getValue($key);
+        foreach($options as $k => $v) {
+            $selected = $k == $value ? " selected" : "";
+            $optionsHTML[] = "<option value=\"$k\" $selected>$v</option>";
+        }
+        $optionsHTML = implode('', $optionsHTML);
+        return <<<HTML
+        <div class="form-group">
+            <label for="field{$key}">{$label}</label>      
+            <select id="field{$key}" class="{$this->getInputClass($key)}" name="{$key}" require>{$optionsHTML}</select>
+            {$this->getErrorFeedback($key)}
+        </div>
+HTML;
+    }
 }

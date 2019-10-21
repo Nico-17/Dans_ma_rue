@@ -4,8 +4,8 @@
     <?= $form->input('date_fin', 'Date de fin'); ?>
     <?= $form->input('X', 'Coordonnées X'); ?>
     <?= $form->input('Y', 'Coordonnées Y'); ?>
-    <?= $form->input('services', 'Services'); ?>
-    <?= $form->input('etat', 'Etat'); ?>
+    <?= $form->select('services', 'Services', $services); ?>
+    <?= $form->select('etat', 'Etats', $etats); ?>
     <?= $form->textarea('nature', 'Nature'); ?>
 
     <button class="btn btn-primary"><?= $bouton ?></button>

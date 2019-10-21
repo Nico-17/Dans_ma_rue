@@ -1,6 +1,7 @@
 <?php
 use App\Connection;
 use App\Table\UtilisateurTable;
+use App\Table\AccesTable;
 use App\Validator;
 use App\HTML\Form;
 use App\Validators\UtilisateurValidator;
@@ -12,6 +13,8 @@ Auth::check();
 $pdo = Connection::getPDO();
 $pdo->exec('SET NAMES utf8');
 $userTable = new UtilisateurTable($pdo);
+$accesTable = new AccesTable($pdo);
+$access = $accesTable->listAcces();
 $user = $userTable->find($params['id']);
 $success = false;
 $errors = [];
@@ -19,7 +22,7 @@ $bouton = 'Modifier';
 
 if (!empty($_POST)){
     Validator::lang('fr');
-    $v = new UtilisateurValidator($_POST);
+    $v = new UtilisateurValidator($_POST, $access);
     ObjectHelper::hydrate($user, $_POST, ['prenom', 'nom', 'role', 'acces', 'username', 'password']);
     if ($v->validate()){
         $userTable->update($user);

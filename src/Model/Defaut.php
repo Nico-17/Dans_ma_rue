@@ -158,6 +158,7 @@ class Defaut{
         $this->date_fin = $date_fin;
         return $this;
     }
+
 }
 
 ?>

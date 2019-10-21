@@ -2,7 +2,7 @@
     <?= $form->input('prenom', 'Prenom'); ?>
     <?= $form->input('nom', 'Nom'); ?>
     <?= $form->input('role', 'Role'); ?>
-    <?= $form->input('acces', 'Acces'); ?>
+    <?= $form->select('acces', 'Acces', $access); ?>
     <?= $form->input('username', 'Nom d\'utilisateur'); ?>
     <?= $form->input('password', 'Mot de passe'); ?>
     <button class="btn btn-primary"><?= $bouton ?></button>

@@ -1,6 +1,7 @@
 <?php
 use App\Connection;
 use App\Table\UtilisateurTable;
+use App\Table\AccesTable;
 use App\Validator;
 use App\HTML\Form;
 use App\Validators\UtilisateurValidator;
@@ -13,14 +14,16 @@ Auth::check();
 $success = false;
 $errors = [];
 $user = new Utilisateur();
+$pdo = Connection::getPDO();
+$pdo->exec('SET NAMES utf8');
+$accesTable = new AccesTable($pdo);
+$access = $accesTable->listAcces();
 $bouton = 'Ajouter';
 
 if (!empty($_POST)){ 
-    $pdo = Connection::getPDO();
-    $pdo->exec('SET NAMES utf8');
     $userTable = new UtilisateurTable($pdo);
     Validator::lang('fr');
-    $v = new UtilisateurValidator($_POST);
+    $v = new UtilisateurValidator($_POST, $access);
     ObjectHelper::hydrate($user, $_POST, ['prenom', 'nom', 'role', 'acces', 'username', 'password']);
     if ($v->validate()){
         $userTable->create($user);

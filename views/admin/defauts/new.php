@@ -1,6 +1,8 @@
 <?php
 use App\Connection;
 use App\Table\DefautTable;
+use App\Table\ServiceTable;
+use App\Table\EtatTable;
 use App\Validator;
 use App\HTML\Form;
 use App\Validators\DefautValidator;
@@ -13,14 +15,18 @@ Auth::check();
 $success = false;
 $errors = [];
 $defaut = new Defaut();
+$pdo = Connection::getPDO();
+$pdo->exec('SET NAMES utf8');
+$etatTable = new EtatTable($pdo);
+$etats = $etatTable->listEtat();
+$serviceTable = new ServiceTable($pdo);
+$services = $serviceTable->list();
 $bouton = 'Ajouter';
 
 if (!empty($_POST)){ 
-    $pdo = Connection::getPDO();
-    $pdo->exec('SET NAMES utf8');
     $defautTable = new DefautTable($pdo);
     Validator::lang('fr');
-    $v = new DefautValidator($_POST);
+    $v = new DefautValidator($_POST, $services, $etats);
     ObjectHelper::hydrate($defaut, $_POST, ['lieu', 'services', 'nature', 'date_fin', 'X', 'Y', 'etat']);
     if ($v->validate()){
         $defautTable->create($defaut);
