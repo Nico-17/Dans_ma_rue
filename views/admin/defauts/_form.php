@@ -1,7 +1,7 @@
 <form action="" method="POST">
     <?= $form->input('lieu', 'Lieu'); ?>
-    <?= $form->input('date_observation', 'Date d\'observation'); ?>
-    <?= $form->input('date_fin', 'Date de fin'); ?>
+    <?= $form->inputDate('date_observation', 'Date d\'observation'); ?>
+    <?= $form->inputDate('date_fin', 'Date de fin'); ?>
     <?= $form->input('X', 'Coordonnées X'); ?>
     <?= $form->input('Y', 'Coordonnées Y'); ?>
     <?= $form->select('services', 'Services', $services); ?>
