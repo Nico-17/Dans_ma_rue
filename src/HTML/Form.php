@@ -55,6 +55,18 @@ class Form{
 HTML;
     }
 
+    public function inputDate(string $key, string $label): string 
+    {
+        $value = $this->getValue($key);
+        return <<<HTML
+        <div class="form-group">
+            <label for="field{$key}">{$label}</label>      
+            <input type="date" id="field{$key}" class="{$this->getInputClass($key)}" name="{$key}" value="{$value}" require>
+            {$this->getErrorFeedback($key)}
+        </div>
+HTML;
+    }
+
 
     public function textarea(string $key, string $label): string 
     {
