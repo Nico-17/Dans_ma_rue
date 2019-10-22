@@ -15,6 +15,7 @@ class DefautValidator{
         $v->rule('required', ['lieu', 'services', 'nature', 'X', 'Y', 'etat']);
         $v->rule('subset', 'services', $services);
         $v->rule('subset', 'etat', $etat);
+        $v->rule('photo', 'photo');
         $this->validator = $v;
     }
 

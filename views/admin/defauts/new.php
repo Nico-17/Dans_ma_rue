@@ -8,10 +8,12 @@ use App\HTML\Form;
 use App\Validators\DefautValidator;
 use App\ObjectHelper;
 use App\Model\Defaut;
+use App\Attachment\DefautAttachment;
 use App\Auth;
 
 Auth::check();
 
+$router->layout = "admin/layouts/default";
 $success = false;
 $errors = [];
 $defaut = new Defaut();
@@ -26,9 +28,11 @@ $bouton = 'Ajouter';
 if (!empty($_POST)){ 
     $defautTable = new DefautTable($pdo);
     Validator::lang('fr');
-    $v = new DefautValidator($_POST, $services, $etats);
-    ObjectHelper::hydrate($defaut, $_POST, ['lieu', 'services', 'nature', 'date_fin', 'X', 'Y', 'etat']);
+    $data = array_merge($_POST, $_FILES);
+    $v = new DefautValidator($data , $services, $etats);
+    ObjectHelper::hydrate($defaut, $data, ['lieu', 'services', 'nature', 'date_fin', 'X', 'Y', 'etat', 'photo']);
     if ($v->validate()){
+        DefautAttachment::upload($defaut);
         $defautTable->create($defaut);
         header('Location: ' . $router->url('admin_defauts'));
         exit();

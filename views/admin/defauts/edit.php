@@ -9,9 +9,11 @@ use App\Validators\DefautValidator;
 use App\ObjectHelper;
 use App\Auth;
 use App\Model\Defaut;
+use App\Attachment\DefautAttachment;
 
 Auth::check();
 
+$router->layout = "admin/layouts/default";
 $pdo = Connection::getPDO();
 $pdo->exec('SET NAMES utf8');
 $defautTable = new DefautTable($pdo);
@@ -26,9 +28,11 @@ $bouton = 'Modifier';
 
 if (!empty($_POST)){
     Validator::lang('fr');
-    $v = new DefautValidator($_POST, $services, $etats);
-    ObjectHelper::hydrate($defaut, $_POST, ['lieu', 'services', 'nature', 'date_fin', 'X', 'Y', 'etat']);
+    $data = array_merge($_POST, $_FILES);
+    $v = new DefautValidator($data, $services, $etats);
+    ObjectHelper::hydrate($defaut, $data, ['lieu', 'services', 'nature', 'date_fin', 'X', 'Y', 'etat', 'photo']);
     if ($v->validate()){
+        DefautAttachment::upload($defaut);
         $defautTable->update($defaut);
         $success = true;
     } else {

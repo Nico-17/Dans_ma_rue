@@ -7,18 +7,46 @@ $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
+define('UPLOAD_PATH', __DIR__ . DIRECTORY_SEPARATOR . 'uploads');
+
 $router = new App\Router(dirname(__DIR__) . '/views');
 $router
+    ->get('/css', 'layouts/css', 'static_css')
+
+                    //Ecran de connexion
+    ->get('/login', 'login/login', 'connexion')
+    
                     //Utilisateur
     //Accueil
     ->get('/', 'read/index', 'accueil')
     //Defaut
-    ->get('/defaut', 'read/list_defaut', 'defaut')
+    ->get('/defaut', 'read/defauts/read_defaut', 'defaut')
     //Service
-    ->get('/service', 'read/list_service', 'service')
+    ->get('/service', 'read/services/read_services', 'service')
+
+                    //Contributeur
+    //Accueil
+    ->get('/contrib', 'contrib/index', 'accueil_contrib')
+    //Defaut
+    ->get('/contrib/defaut', 'contrib/defauts/contrib_defaut', 'contrib_defauts')
+    ->match('/contrib/defaut/[i:id]', 'contrib/defauts/edit', 'contrib_defaut')
+    //Service
+    ->get('/contrib/service', 'contrib/services/contrib_services', 'contrib_services')
+
+                    //Editeur
+    //Accueil
+    ->get('/edit', 'edit/index', 'accueil_edit')
+    //Defaut
+    ->get('/edit/defaut', 'edit/defauts/edit_defaut', 'edit_defauts')
+    ->match('/edit/defaut/[i:id]', 'edit/defauts/edit', 'edit_defaut')
+    ->post('/edit/defaut/[i:id]/delete', 'edit/defauts/delete', 'edit_defaut_delete')
+    ->match('/edit/defaut/new', 'edit/defauts/new', 'edit_defaut_new')
+    //Service
+    ->get('/edit/service', 'edit/services/edit_services', 'edit_services')
+
                     //Administrateur
      //Accueil
-    ->get('/', 'admin/index', 'accueil_admin') 
+    ->get('/admin', 'admin/index', 'accueil_admin') 
     //Defaut
     ->get('/admin/defaut', 'admin/defauts/admin_defaut', 'admin_defauts')
     ->match('/admin/defaut/[i:id]', 'admin/defauts/edit', 'admin_defaut')

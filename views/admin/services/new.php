@@ -10,6 +10,7 @@ use App\Auth;
 
 Auth::check();
 
+$router->layout = "admin/layouts/default";
 $success = false;
 $errors = [];
 $services = new Service();

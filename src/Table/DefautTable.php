@@ -17,7 +17,7 @@ class DefautTable{
 
     public function create(Defaut $defaut): void 
     {
-        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET lieu = :lieu, nature = :nature, services = :services, date_fin = :date_fin, X = :X, Y = :Y, etat = :etat");
+        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET lieu = :lieu, nature = :nature, services = :services, date_fin = :date_fin, X = :X, Y = :Y, etat = :etat, photo = :photo");
         $ok = $query->execute([
             'lieu' => $defaut->getLieu(),
             'X' => $defaut->getX(),
@@ -25,7 +25,8 @@ class DefautTable{
             'etat' => $defaut->getEtat(),
             'services' => $defaut->getServices(),
             'nature' => $defaut->getNature(),
-            'date_fin' => $defaut->getDateFin()
+            'date_fin' => $defaut->getDateFin(),
+            'photo' => $defaut->getPhoto()
             
         ]);
         if($ok === false){
@@ -36,7 +37,7 @@ class DefautTable{
 
     public function update(Defaut $defaut): void 
     {
-        $query = $this->pdo->prepare("UPDATE {$this->table} SET lieu = :lieu, nature = :nature, services = :services, date_fin = :date_fin, X = :X, Y = :Y, etat = :etat WHERE id = :id");
+        $query = $this->pdo->prepare("UPDATE {$this->table} SET lieu = :lieu, nature = :nature, services = :services, date_fin = :date_fin, X = :X, Y = :Y, etat = :etat, photo = :photo WHERE id = :id");
         $ok = $query->execute([
             'id' => $defaut->getId(),
             'lieu' => $defaut->getLieu(),
@@ -45,8 +46,8 @@ class DefautTable{
             'etat' => $defaut->getEtat(),
             'services' => $defaut->getServices(),
             'nature' => $defaut->getNature(),
-            'date_fin' => $defaut->getDateFin()
-            
+            'date_fin' => $defaut->getDateFin(),
+            'photo' => $defaut->getPhoto()
         ]);
         if($ok === false){
             throw new \Exception("Erreur lors de la modification du défaut  n°$id");

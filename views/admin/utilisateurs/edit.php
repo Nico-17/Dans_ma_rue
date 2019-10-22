@@ -10,6 +10,7 @@ use App\Auth;
 
 Auth::check();
 
+$router->layout = "admin/layouts/default";
 $pdo = Connection::getPDO();
 $pdo->exec('SET NAMES utf8');
 $userTable = new UtilisateurTable($pdo);

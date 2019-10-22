@@ -55,6 +55,17 @@ class Form{
 HTML;
     }
 
+    public function file(string $key, string $label): string 
+    {
+        return <<<HTML
+        <div class="form-group">
+            <label for="field{$key}">{$label}</label>      
+            <input type="file" id="field{$key}" class="{$this->getInputClass($key)}" name="{$key}">
+            {$this->getErrorFeedback($key)}
+        </div>
+HTML;
+    }
+
     public function inputDate(string $key, string $label): string 
     {
         $value = $this->getValue($key);
@@ -67,19 +78,6 @@ HTML;
 HTML;
     }
 
-
-    public function textarea(string $key, string $label): string 
-    {
-        $value = $this->getValue($key);
-        return <<<HTML
-        <div class="form-group">
-            <label for="field{$key}">{$label}</label>      
-            <textarea type="text" id="field{$key}" class="{$this->getInputClass($key)}" name="{$key}" require>{$value}</textarea>
-            {$this->getErrorFeedback($key)}
-        </div>
-HTML;    
-    }
-    
     public function select (string $key, string $label, array $options= []): string 
     {
         $optionsHTML = [];
@@ -97,4 +95,18 @@ HTML;
         </div>
 HTML;
     }
+
+    public function textarea(string $key, string $label): string 
+    {
+        $value = $this->getValue($key);
+        return <<<HTML
+        <div class="form-group">
+            <label for="field{$key}">{$label}</label>      
+            <textarea type="text" id="field{$key}" class="{$this->getInputClass($key)}" name="{$key}" require>{$value}</textarea>
+            {$this->getErrorFeedback($key)}
+        </div>
+HTML;    
+    }
 }
+    
+

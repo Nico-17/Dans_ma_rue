@@ -11,6 +11,7 @@ use App\Auth;
 
 Auth::check();
 
+$router->layout = "admin/layouts/default";
 $success = false;
 $errors = [];
 $user = new Utilisateur();

@@ -15,6 +15,10 @@ class Defaut{
 
     private $photo;
 
+    private $oldPhoto;
+
+    private $pendingUpload = false;
+
     private $date_observation;
 
     private $etat;
@@ -126,15 +130,34 @@ class Defaut{
         return $this;
     }
 
-    public function getPhoto()
+    public function getPhoto(): ?string
     {
         return $this->photo;
     }
 
     public function setPhoto( $photo): self
     {
-        $this->photo = $photo;
+        if(is_array($photo) && !empty($photo['tmp_name'])){
+            if (!empty($this->photo)){
+                $this->oldPhoto = $this->photo;
+            }
+            $this->pendingUpload = true;
+            $this->photo = $photo['tmp_name'];
+        }
+        if(is_string($photo) && !empty($photo)){
+            $this->photo = $photo;
+        }
         return $this;
+    }
+
+    public function getOldPhoto(): ?string
+    {
+        return $this->oldPhoto;
+    }
+
+    public function shouldUpload(): bool 
+    {
+        return $this->pendingUpload;
     }
 
     public function getDateObservation(): DateTime
