@@ -5,6 +5,8 @@
   
   .bg-img{
     background: url(../images/la-rochelle.png);
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
   }
   
