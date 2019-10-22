@@ -24,7 +24,7 @@ class UtilisateurTable{
             'role' => $user->getRole(),
             'acces' => $user->getAcces(),
             'username' => $user->getUsername(),
-            'password' => $user->getPassword()
+            'password' => password_hash($user->getPassword(), PASSWORD_DEFAULT)
         ]);
         if($ok === false){
             throw new \Exception("Erreur lors de la création de l'utilisateur");
@@ -42,7 +42,7 @@ class UtilisateurTable{
             'role' => $user->getRole(),
             'acces' => $user->getAcces(),
             'username' => $user->getUsername(),
-            'password' => $user->getPassword()
+            'password' => password_hash($user->getPassword(), PASSWORD_DEFAULT)
         ]);
         if($ok === false){
             throw new \Exception("Erreur lors de la modification de l'utilisateur");
