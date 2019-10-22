@@ -5,6 +5,7 @@ use App\Table\ServiceTable;
 
 Auth::check();
 
+$router->layout = "admin/layouts/default";
 $pdo = Connection::getPDO();
 $pdo->exec('SET NAMES utf8');
 $table = new ServiceTable($pdo);
