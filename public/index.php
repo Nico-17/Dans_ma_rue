@@ -12,7 +12,8 @@ define('UPLOAD_PATH', __DIR__ . DIRECTORY_SEPARATOR . 'uploads');
 $router = new App\Router(dirname(__DIR__) . '/views');
 $router
                     //Ecran de connexion
-    ->get('/login', 'login/login', 'connexion')
+    ->match('/login', 'auth/login', 'login')
+    ->post('/logout', 'auth/logout', 'logout' )
     
                     //Utilisateur
     //Accueil

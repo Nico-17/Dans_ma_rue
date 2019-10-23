@@ -1,13 +1,20 @@
 <?php
-use App\Connection;
 use App\Auth;
 use App\Table\DefautTable;
+use App\Connection;
+use App\Model\Utilisateur;
+use App\Table\UtilisateurTable;
 
 Auth::check();
 
 $router->layout = "admin/layouts/default";
 $pdo = Connection::getPDO();
 $pdo->exec('SET NAMES utf8');
+
+if($_SESSION['acces'] != 'admin'){
+    session_destroy();
+    header('Location: ' . $router->url('login'));
+}
 
 $table = new DefautTable($pdo);
 [$defauts, $pagination] = $table->findPaginated();

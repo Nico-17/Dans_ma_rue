@@ -11,6 +11,11 @@ use App\Auth;
 
 Auth::check();
 
+if($_SESSION['acces'] != 'admin'){
+    session_destroy();
+    header('Location: ' . $router->url('login'));
+}
+
 $router->layout = "admin/layouts/default";
 $success = false;
 $errors = [];

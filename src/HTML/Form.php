@@ -38,7 +38,12 @@ class Form{
     private function getErrorFeedback(string $key): string
     {
         if(isset($this->errors[$key])){
-            return'<div class="invalid-feedback">' . implode('<br>', $this->errors[$key]) . '</div>';
+            if(is_array($this->errors[$key])){
+                $error = implode('<br>', $this->errors[$key]);
+            } else {
+                $error = $this->errors[$key];
+            }
+            return'<div class="invalid-feedback">' . $error . '</div>';
         }
         return '';
     }
@@ -46,10 +51,23 @@ class Form{
     public function input(string $key, string $label): string 
     {
         $value = $this->getValue($key);
+        $type = $key === "password" ? "password" : "text";
         return <<<HTML
         <div class="form-group">
             <label for="field{$key}">{$label}</label>      
-            <input type="text" id="field{$key}" class="{$this->getInputClass($key)}" name="{$key}" value="{$value}" require>
+            <input type="{$type}" id="field{$key}" class="{$this->getInputClass($key)}" name="{$key}" value="{$value}" require>
+            {$this->getErrorFeedback($key)}
+        </div>
+HTML;
+    }
+
+    public function textarea(string $key, string $label): string 
+    {
+        $value = $this->getValue($key);
+        return <<<HTML
+        <div class="form-group">
+            <label for="field{$key}">{$label}</label>      
+            <textarea type="text" id="field{$key}" class="{$this->getInputClass($key)}" name="{$key}" require>{$value}</textarea>
             {$this->getErrorFeedback($key)}
         </div>
 HTML;
@@ -94,19 +112,6 @@ HTML;
             {$this->getErrorFeedback($key)}
         </div>
 HTML;
-    }
-
-    public function textarea(string $key, string $label): string 
-    {
-        $value = $this->getValue($key);
-        return <<<HTML
-        <div class="form-group">
-            <label for="field{$key}">{$label}</label>      
-            <textarea type="text" id="field{$key}" class="{$this->getInputClass($key)}" name="{$key}" require>{$value}</textarea>
-            {$this->getErrorFeedback($key)}
-        </div>
-HTML;    
-    }
+    }  
 }
-    
-
+?>

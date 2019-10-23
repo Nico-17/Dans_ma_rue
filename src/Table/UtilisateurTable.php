@@ -3,12 +3,15 @@ namespace App\Table;
 
 use App\PaginatedQuery;
 use App\Model\Utilisateur;
+use App\Table\Exception\NotFoundException;
 use \PDO;
+use App\Auth;
 
 class UtilisateurTable{
 
     private $pdo;
     protected $table = "user";
+    protected $class = Utilisateur::class;
 
     public function __construct(PDO $pdo)
     {
@@ -81,6 +84,18 @@ class UtilisateurTable{
         );
         $users = $paginatedQuery->getItems(Utilisateur::class);
         return [$users, $paginatedQuery];
+    }
+
+    public function findByUsername(string $username)
+    {
+        $query = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE username = :username");
+        $query->execute(['username' => $username]);
+        $query->setFetchMode(PDO::FETCH_CLASS, Utilisateur::class);
+        $result = $query->fetch();
+        if($result === false){
+            throw new NotFoundException($this->table, $username);
+        }
+        return $result;
     }
 
 }

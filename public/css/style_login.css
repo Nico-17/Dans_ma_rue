@@ -8,6 +8,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    /*height: 100vh;*/
   }
   
   .card-signin {
@@ -104,6 +105,19 @@
   
 .btn-connexion{
     margin-top: 20%;
+}
+
+.form-control{
+  border-radius: 2rem;
+}
+
+label{
+  text-align: center;
+  margin-left: 5%;
+}
+
+.card-margin{
+  margin-top: -8rem;
 }
 
 

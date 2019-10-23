@@ -72,7 +72,7 @@ class Utilisateur{
         return $this;
     }
 
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->username;
     }
@@ -83,7 +83,7 @@ class Utilisateur{
         return $this;
     }
 
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }

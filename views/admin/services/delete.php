@@ -5,6 +5,11 @@ use App\Table\ServiceTable;
 
 Auth::check();
 
+if($_SESSION['acces'] != 'admin'){
+    session_destroy();
+    header('Location: ' . $router->url('login'));
+}
+
 $router->layout = "admin/layouts/default";
 $pdo = Connection::getPDO();
 $pdo->exec('SET NAMES utf8');

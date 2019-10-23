@@ -13,6 +13,11 @@ use App\Attachment\DefautAttachment;
 
 Auth::check();
 
+if($_SESSION['acces'] != 'update' && $_SESSION['acces'] != 'admin'){
+    session_destroy();
+    header('Location: ' . $router->url('login'));
+}
+
 $router->layout = "contrib/layouts/default";
 $pdo = Connection::getPDO();
 $pdo->exec('SET NAMES utf8');

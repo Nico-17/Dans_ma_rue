@@ -4,6 +4,12 @@ use App\Auth;
 use App\Table\DefautTable;
 
 Auth::check();
+
+if($_SESSION['acces'] != 'edit' && $_SESSION['acces'] != 'admin'){
+    session_destroy();
+    header('Location: ' . $router->url('login'));
+}
+
 $router->layout = "edit/layouts/default";
 $pdo = Connection::getPDO();
 $pdo->exec('SET NAMES utf8');
