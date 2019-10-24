@@ -20,7 +20,7 @@ class ServiceTable{
     {
         $query = $this->pdo->prepare("INSERT INTO {$this->table} SET services = :services, contact = :contact, tel = :tel, courriel = :courriel");
         $ok = $query->execute([
-            'services' => $services->getServices(),
+            'services' => str_replace(' ', '-',$services->getServices()),
             'contact' => $services->getContact(),
             'tel' => $services->getTel(),
             'courriel' => $services->getCourriel()

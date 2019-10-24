@@ -4,7 +4,7 @@
     <?= $form->inputDate('date_fin', 'Date de fin'); ?>
     <?= $form->input('X', 'Coordonnées X'); ?>
     <?= $form->input('Y', 'Coordonnées Y'); ?>
-    <?= $form->select('services', 'Services', $services); ?>
+    <?= $form->select('services', 'Services', str_replace('-', ' ',$services)); ?>
     <?= $form->select('etat', 'Etats', $etats); ?>
     <?= $form->file('photo', 'Photo'); ?>
     <div class="row">

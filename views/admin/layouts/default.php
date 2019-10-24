@@ -16,7 +16,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                <li class="nav-item"><a href="#" class="nav-link navcolor">Accueil</a></li>
+                <li class="nav-item"><a href="<?= $router->url('accueil_admin') ?>" class="nav-link navcolor">Accueil</a></li>
                 <li class="nav-item"><a href="<?= $router->url('admin_defauts') ?>" class="nav-link navcolor">Defauts</a></li>
                 <li class="nav-item"><a href="<?= $router->url('admin_services') ?>" class="nav-link navcolor">Services</a></li>
                 <li class="nav-item"><a href="<?= $router->url('admin_utilisateurs') ?>" class="nav-link navcolor">Utilisateurs</a></li>
