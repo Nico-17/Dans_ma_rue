@@ -13,5 +13,15 @@ if($_SESSION['acces'] != 'read' && $_SESSION['acces'] != 'admin'){
 $router->layout = "read/layouts/home_default";
 $pdo = Connection::getPDO();
 $pdo->exec('SET NAMES utf8');
+
+$table = new DefautTable($pdo);
+[$defauts, $pagination] = $table->findPaginated();
+
 ?>
+ 
+<div class="list d-none">
+    <?php foreach($defauts as $defaut): ?>
+        <?php require 'home_card.php' ?>
+    <?php endforeach ?>
+</div>
 
