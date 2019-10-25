@@ -28,7 +28,7 @@ class DefautAttachment{
         $manager = new ImageManager(['driver' => 'gd']);
         $manager
             ->make($photo)
-            ->resize(450, 350, function ($constraint){
+            ->resize(350, 250, function ($constraint){
                 $constraint->aspectRatio();
             })
             ->save($directory . DIRECTORY_SEPARATOR . $filename);

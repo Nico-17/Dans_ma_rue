@@ -22,10 +22,10 @@ class LeafletMap{
         })      
     }
     
-    addMarker(lat,lng){
+    addMarker(lat,lng, info){
         let point = [lat, lng]
         this.bounds.push(point)
-        return new LeafletMarker(point, this.map)
+        return new LeafletMarker(point, this.map, info)
     }
 
     center (){
@@ -44,9 +44,9 @@ class LeafletMap{
 }
 
 class LeafletMarker{
-    constructor(point,map){
+    constructor(point,map, info){
         this.marker = L.marker(point).addTo(map)
-        this.marker.bindPopup('<p>popupContent</p>').openPopup()
+        this.marker.bindPopup(info).openPopup()
     }
 }
 
@@ -54,7 +54,7 @@ const initMap =  async function(){
     let map = new LeafletMap()
     await map.load($map)
     Array.from(document.querySelectorAll('.js-marker')).forEach((item) => {
-        let marker = map.addMarker(item.dataset.lat, item.dataset.lng)
+        let marker = map.addMarker(item.dataset.lat, item.dataset.lng, item.dataset.info)
         
     })
     map.center()
