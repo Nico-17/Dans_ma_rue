@@ -14,8 +14,11 @@ $router
                     //Ecran de connexion
     ->match('/login', 'auth/login', 'login')
     ->post('/logout', 'auth/logout', 'logout' )
-    
+
+                    
                     //Utilisateur
+    //Mentions légales
+    ->get('/mentions-legales', 'read/cgu', 'mentions_legales')                
     //Accueil
     ->get('/', 'read/index', 'accueil')
     //Defaut
@@ -24,6 +27,8 @@ $router
     ->get('/service', 'read/services/read_services', 'service')
 
                     //Contributeur
+    //Mentions légales
+    ->get('/contrib/mentions-legales', 'contrib/cgu', 'contrib_mentions_legales')   
     //Accueil
     ->get('/contrib', 'contrib/index', 'accueil_contrib')
     //Defaut
@@ -33,6 +38,8 @@ $router
     ->get('/contrib/service', 'contrib/services/contrib_services', 'contrib_services')
 
                     //Editeur
+    //Mentions légales
+    ->get('/edit/mentions-legales', 'edit/cgu', 'edit_mentions_legales')   
     //Accueil
     ->get('/edit', 'edit/index', 'accueil_edit')
     //Defaut
@@ -44,6 +51,8 @@ $router
     ->get('/edit/service', 'edit/services/edit_services', 'edit_services')
 
                     //Administrateur
+    //Mentions légales
+    ->get('/admin/mentions-legales', 'admin/cgu', 'admin_mentions_legales')   
      //Accueil
     ->get('/admin', 'admin/index', 'accueil_admin') 
     //Defaut

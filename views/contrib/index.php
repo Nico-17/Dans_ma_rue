@@ -5,7 +5,7 @@ use App\Auth;
 
 Auth::check();
 
-if($_SESSION['acces'] != 'contrib' && $_SESSION['acces'] != 'admin'){
+if($_SESSION['acces'] != 'update' && $_SESSION['acces'] != 'admin'){
     session_destroy();
     header('Location: ' . $router->url('login'));
 }

@@ -15,3 +15,13 @@ nav{
 .navcolor{
     color: black !important;
 }
+
+@media screen and (max-width: 992px){
+    .navcolor{
+        text-align: left;
+    }
+    .form-logout{
+        display: flex !important;
+        justify-content: left !important;
+    }
+}

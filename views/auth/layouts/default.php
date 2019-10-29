@@ -10,7 +10,7 @@
     <!-- CSS Perso -->
     <link rel="stylesheet" href="css/style_login.css" type="text/css">
     <!-- Titre de la page -->
-    <title>Dans Ma Rue</title>
+    <title>Balade urbaine</title>
 </head>
 <header>
 </header>
@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto d-flex justify-content-center flex-column align-items-center mt-5">
                 <a href="https://www.larochelle.fr/" target="_blank"><img src="images/Logo_la_rochelle.svg" alt="Logo de la ville de La Rochelle, en Charente-Maritime" width="80px" height="80px"></a>
-                <h3 class="text-uppercase ">Dans ma rue</h3>
+                <h3 class="text-uppercase ">Balade urbaine</h3>
             </div>
         </div>
     </div>

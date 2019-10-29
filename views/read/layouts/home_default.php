@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/style.css">
 <body class="h-100">
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-        <a href="<?= $router->url('accueil') ?>" class="navbar-brand d-flex flex-column"><img src="/images/Logo_la_rochelle.svg" alt="Logo de la ville de La Rochelle en Charente-Maritime">DANS MA RUE</a>
+        <a href="<?= $router->url('accueil') ?>" class="navbar-brand d-flex flex-column"><img src="/images/Logo_la_rochelle.svg" alt="Logo de la ville de La Rochelle en Charente-Maritime" width="60px" height="60px" class="ml-5">BALADE URBAINE</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -21,7 +21,7 @@
                 <li class="nav-item "><a href="<?= $router->url('defaut') ?>" class="nav-link navcolor">Defauts</a></li>
                 <li class="nav-item "><a href="<?= $router->url('service') ?>" class="nav-link navcolor">Services</a></li>
                 <li class="nav-item ">
-                    <form action="<?= $router->url('logout') ?>" method="post" class="d-inline">
+                    <form action="<?= $router->url('logout') ?>" method="post" class="d-inline form-logout">
                         <button type="submit" class="nav-link bg-transparent border-0 logout">Se déconnecter</button>
                     </form>
                 </li>
@@ -35,6 +35,7 @@
         <!-- Ici s'affichera la carte -->    
     <footer class="d-flex justify-content-center h-auto mt-5" >
         <a href="https://www.sylvan-formations.com/" target="_blank"><img src="/images/logo_sylvan.png" alt="Logo Sylvan Formations" class="sylvan-logo p-4"></a> 
+        <a href="<?= $router->url('mentions_legales')?>" class="text-dark align-self-center">Mentions légales</a>
     </footer>
     <!-- Fichiers Javascript -->
     <script src="/js/vendor.js"></script>

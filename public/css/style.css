@@ -18,3 +18,12 @@ nav{
 .navbar-nav{
     margin-left: 5rem;
 }
+@media screen and (max-width: 992px){
+    .navcolor{
+        text-align: left;
+    }
+    .form-logout{
+        display: flex !important;
+        justify-content: left !important;
+    }
+}

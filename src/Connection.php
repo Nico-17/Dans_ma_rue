@@ -9,7 +9,7 @@ class Connection{
     public static function getPDO (): PDO
     {
 
-        return new PDO('mysql:host=localhost;dbname=Dans_Ma_Rue', 'root', 'root',
+        return new PDO('mysql:host=localhost;dbname=dans_ma_rue', 'root', 'root',
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ]);
