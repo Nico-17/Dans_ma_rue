@@ -35,7 +35,7 @@ if (!empty($_POST)){
     Validator::lang('fr');
     $data = array_merge($_POST, $_FILES);
     $v = new DefautValidator($data , $services, $etats);
-    ObjectHelper::hydrate($defaut, $data, ['lieu', 'services', 'nature', 'date_fin', 'X', 'Y', 'etat', 'photo']);
+    ObjectHelper::hydrate($defaut, $data, ['lieu', 'services', 'nature', 'date_fin', 'etat', 'photo']);
     if ($v->validate()){
         DefautAttachment::upload($defaut);
         $defautTable->create($defaut);

@@ -17,11 +17,15 @@ class DefautTable{
 
     public function create(Defaut $defaut): void 
     {
-        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET lieu = :lieu, nature = :nature, services = :services, date_fin = :date_fin, X = :X, Y = :Y, etat = :etat, photo = :photo");
+        $adress = $defaut->getLieu();
+        $adress = urlencode($adress);
+        $json = file_get_contents("https://api-adresse.data.gouv.fr/search/?q={$adress}");
+        $obj = json_decode($json, true);
+        $x = $obj["features"][0]["geometry"]["coordinates"][1];
+        $y = $obj["features"][0]["geometry"]["coordinates"][0]; 
+        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET lieu = :lieu, nature = :nature, services = :services, date_fin = :date_fin, X = $x, Y = $y, etat = :etat, photo = :photo");
         $ok = $query->execute([
             'lieu' => $defaut->getLieu(),
-            'X' => $defaut->getX(),
-            'Y' => $defaut->getY(),
             'etat' => $defaut->getEtat(),
             'services' => $defaut->getServices(),
             'nature' => $defaut->getNature(),
@@ -37,12 +41,16 @@ class DefautTable{
 
     public function update(Defaut $defaut): void 
     {
-        $query = $this->pdo->prepare("UPDATE {$this->table} SET lieu = :lieu, nature = :nature, services = :services, date_fin = :date_fin, X = :X, Y = :Y, etat = :etat, photo = :photo WHERE id = :id");
+        $adress = $defaut->getLieu();
+        $adress = urlencode($adress);
+        $json = file_get_contents("https://api-adresse.data.gouv.fr/search/?q={$adress}");
+        $obj = json_decode($json, true);
+        $x = $obj["features"][0]["geometry"]["coordinates"][1];
+        $y = $obj["features"][0]["geometry"]["coordinates"][0]; 
+        $query = $this->pdo->prepare("UPDATE {$this->table} SET lieu = :lieu, nature = :nature, services = :services, date_fin = :date_fin, X = $x, Y = $y, etat = :etat, photo = :photo WHERE id = :id");
         $ok = $query->execute([
             'id' => $defaut->getId(),
             'lieu' => $defaut->getLieu(),
-            'X' => $defaut->getX(),
-            'Y' => $defaut->getY(),
             'etat' => $defaut->getEtat(),
             'services' => $defaut->getServices(),
             'nature' => $defaut->getNature(),
@@ -87,4 +95,5 @@ class DefautTable{
         $defauts = $paginatedQuery->getItems(Defaut::class);
         return [$defauts, $paginatedQuery];
     }
+
 }

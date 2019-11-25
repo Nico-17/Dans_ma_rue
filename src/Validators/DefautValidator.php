@@ -12,7 +12,7 @@ class DefautValidator{
     {
         $this->data = $data;
         $v = new Validator($data);
-        $v->rule('required', ['lieu', 'services', 'nature', 'X', 'Y', 'etat']);
+        $v->rule('required', ['lieu', 'services', 'nature','etat']);
         $v->rule('subset', 'services', $services);
         $v->rule('subset', 'etat', $etat);
         $v->rule('photo', 'photo');
